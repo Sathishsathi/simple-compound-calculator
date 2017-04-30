@@ -1,0 +1,187 @@
+<html>
+<head>
+<title>
+Calculate | Simple and compound interest 
+</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+<!-- Style -->
+
+<style>
+a:link {
+    text-decoration: underline;
+}
+.modal {
+  text-align: center;
+  padding: 0!important;
+}
+
+.modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px;
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+</style>
+</head>
+<body>
+<!-- header -->
+
+  <div class="container-fluid" style="background-color:#ff3386;">
+    <br> <br>
+    <center>
+      <span class="glyphicon glyphicon-tint" style="color:white;font-size:60px"></span>
+      <h2 style="color:white"><b>Hello User</b></h2>
+      <h4 style="color:white"><i>Here you can calculate simple and compound interest</i></h4>
+    </center>
+  </div>
+
+<!-- body of the app -->
+<div class="container" style="padding-top:50px">
+<br><br>
+  <div class="col-md-4">
+  </div>
+  <div class="col-md-4">
+  <!-- app starts -->
+  <div  ng-app="rootapp">
+  
+    <!-- simple interest -->
+    <div id="simple" ng-controller="smp" ng-init="display=false">
+      <center>
+        <button type="button" class="btn btn-primary" style="background-color:#ff3386;" ng-click="toggle()" data-toggle="modal" data-target="#simplemodal"><h4><b>Simple Interst</b></h4></button><br>
+        <div id="simplemodal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <center><h4 class="modal-title">Simple Interest</h4></center>
+              </div>
+            <div class="modal-body">
+              <center>
+                <h4>Please fill all datas and then you can click calculate</h4>
+                <form name="dataform">
+                  <input type="text" placeholder="Enter principle amount" required ng-model="p"/><br>
+                  <input type="text" placeholder="Rate of interest" required ng-model="i"/><br>
+                  <input type="text" placeholder="Number of years" required ng-model="n"/><br><br>
+                  <center><button type="button" class="btn btn-primary" style="background-color:#ff3386;" ng-disabled="dataform.$invalid" ng-click="flag=true"><b>Calculate</b></button><br><br>
+                  <button type="reset" class="btn btn-primary" style="background-color:#ff3386;" ng-click="flag=false"><b>Reset</b></button>
+                </form>
+              </center>
+            </div>
+            <div class="modal-footer">
+              <div ng-show="flag">
+                <div ng-if="calculate()">
+                  <center>
+                  <h5><b>Simple Interest is {{ calculate() | number:2 }}</b></h5>
+                  <h5><b>Total amount has to be paid is {{ calculate() + p | number:2 }}</b></h5>
+                  <center>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+
+    <!-- compound interest -->
+    <div  id="compound" ng-controller="cmp" ng-init="display=false">
+      <br><br>
+      <center><button type="button" class="btn btn-primary" style="background-color:#ff3386;" data-toggle="modal" data-target="#compoundmodal" ng-click="toggle()"><h4><b>Compound Interst</b></h4></button><br><br>
+      <div id="compoundmodal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+        <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <center><h4 class="modal-title">Compound Interest</h4></center>
+            </div>
+            <div class="modal-body" ng-init="flag=false">
+              <center>
+              <h4>Please fill all datas and then you can click calculate</h4>
+              <form name="compoundform">
+                <input type="text" placeholder="Enter principle amount" required ng-model="pc"/><br>
+                <input type="text" placeholder="Rate of interest" required ng-model="ic"/><br>
+                <input type="text" placeholder="Number of years" required ng-model="nc"/><br>
+                <input type="text" placeholder="Number of times" required ng-model="tc"/><br><br>
+                <button type="button" class="btn btn-primary" style="background-color:#ff3386;" ng-disabled="compoundform.$invalid" ng-click="flag=true"><b>Calculate</b></button><br><br>
+                <button type="reset" class="btn btn-primary" style="background-color:#ff3386;" ng-click="flag=false"><b>Reset</b></button>
+              </form>
+              </center>
+            </div>
+            <div class="modal-footer">
+              <div ng-show="flag">
+                <div ng-if="calculate()">
+                  <center>
+                  <h5><b>Compound Interest is {{ calculate() - pc | number:2 }}</b></h5>
+                  <h5><b>Total amount has to be paid is {{ calculate() | number:2 }}</b></h5>
+                  <center>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>      
+    </div>
+    </div>
+    <div class="col-md-4">
+    </div>
+</div>
+
+
+<script>
+var rootapp=angular.module('rootapp', ['simple','compound']);
+var app1 = angular.module('simple',[]);
+app1.controller('smp', function($scope){
+   $scope.toggle = function(){
+      $scope.display=!$scope.display;
+}
+   $scope.calculate = function(){
+      if (dataform.$invalid){
+         $scope.flag = false;
+}
+      $scope.p = parseInt($scope.p);
+      $scope.i = parseInt($scope.i);
+      $scope.ip = $scope.i/100;
+      $scope.n = parseInt($scope.n);
+      return (($scope.p * $scope.ip * $scope.n)/100);
+      
+}
+
+});
+
+var app1 = angular.module('compound',[]);
+app1.controller('cmp', function($scope){
+   $scope.toggle = function(){
+      $scope.display=!$scope.display;
+}
+   $scope.calculate = function(){
+      $scope.pc = parseInt($scope.pc);
+      $scope.ic = parseInt($scope.ic);
+      $scope.ipc = $scope.ic/100;
+      $scope.nc = parseInt($scope.nc);
+      $scope.tc = parseInt($scope.tc);
+      $scope.ratio = 1+($scope.ipc/$scope.tc);
+      $scope.power = $scope.tc * $scope.nc;
+      $scope.powerv = Math.pow($scope.ratio, $scope.power);
+      return ($scope.pc * $scope.powerv);
+
+}
+   
+});
+</script>
+
+</body>
+</html>
+
