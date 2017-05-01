@@ -11,58 +11,55 @@ Calculate | Simple and compound interest
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 
 <style>
-a:link {
+  a:link {
     text-decoration: none;
-}
-a:hover{
-    color: black;
-}
-body{
-  background-image:url("bg.svg");
-   
-}
+  }
+
+  body{
+    background-image:url("bg.svg");
+  }
 </style>
 
 
 </head>
 <body>
-<div class="container">
-<div class="col-md-3">
-</div>
-<div class="col-md-6 text-center" style="padding-top:50px; margin-top:5%; background-color:white; box-shadow: 0px 0px 10px #000;">
-  <div  ng-app="rootapp">
-  <center><h2>INTEREST CALCULATOR</h2><br></center>
- <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#about">About</a></li>
-    <li><a data-toggle="tab" href="#SI">Simple Interest</a></li>
-    <li><a data-toggle="tab" href="#CI">Compound Interest</a></li>
-  </ul>
-<div class="tab-content">
-    <div id="about" class="tab-pane fade in active">
-      <h3>About</h3>
-     <center> <img src="profile.jpg" class="img-circle" width="60px" height="60px"/></center>
-<h5>Developed By <a href="https://sathishsathi.github.io/"><b>Sathish Kumar K</b></a></h5>
-      <p>A simple web application designed using AngularJS. This application will calculates you a Simple interest and Compound Interest.</p> <h5><b>Note</b></h5>
-        <ul>
-        <li>Click on the tabs to start calculating</li>
-        <li>No field should be left unfilled.</li>
-        
-        </ul><br><br>
+  <div class="container">
+    <div class="col-md-3">
     </div>
-    <div id="SI" class="tab-pane fade">
-       <div id="simple" ng-controller="smp" ng-init="flag=false">
-        <br>
-        <center><h4>Simple Interest</h4></center>
-        <center>
-                <h5>Please fill all datas</h5>
-                <form name="dataform">
-                  <input  type="text" class="custom-width-center" placeholder="Enter principle amount"  ng-model="p" ng-focus="flag=false" /><br><br>
-                  <input type="text" class="custom-width-center" placeholder="Rate of interest"  ng-model="i" ng-focus="flag=false" /><br><br>
-                  <input type="text" class="custom-width-center" placeholder="Number of years" ng-model="n" ng-focus="flag=false" /><br><br>
-                  <center><button type="button" class="btn btn-primary" style="background-color:#ff3386;"  ng-click="flag=true; calculate()"><b>Calculate</b></button><br><br>
-                  <button type="reset" class="btn btn-primary" style="background-color:#ff3386;" ng-click="flag=false; p=0; i=0; n=0"><b>Reset</b></button><br><br>
-                </form>
-              </center>
+    <div class="col-md-6 text-center" style="padding-top:50px; margin-top:5%; background-color:white; box-shadow: 0px 0px 10px #000;">
+      <!-- app starts -->
+      <div  ng-app="rootapp">
+        <center><h2>INTEREST CALCULATOR</h2><br></center>
+        <ul class="nav nav-tabs">
+          <li class="active"><a data-toggle="tab" href="#about">About</a></li>
+          <li><a data-toggle="tab" href="#SI">Simple Interest</a></li>
+          <li><a data-toggle="tab" href="#CI">Compound Interest</a></li>
+       </ul>
+       <div class="tab-content">
+         <div id="about" class="tab-pane fade in active">
+           <h3>About</h3>
+           <center> <img src="profile.jpg" class="img-circle" width="60px" height="60px"/></center>
+           <h5>Developed By <a href="https://sathishsathi.github.io/"><b>Sathish Kumar K</b></a></h5>
+           <p>A simple web application designed using AngularJS. This application will calculates you a Simple interest and Compound Interest.</p> 
+           <h5><b>Note</b></h5>
+           <ul>
+             <li>Click on the tabs to start calculating</li>
+             <li>No field should be left unfilled.</li>
+           </ul><br><br>
+         </div>
+         <div id="SI" class="tab-pane fade">
+           <div id="simple" ng-controller="smp" ng-init="flag=false">
+             <br>
+             <center><h4>Simple Interest</h4>
+             <h5>Please fill all datas</h5>
+             <form name="dataform">
+               <input  type="text" class="custom-width-center" placeholder="Enter principle amount"  ng-model="p" ng-focus="flag=false" /><br><br>
+               <input type="text" class="custom-width-center" placeholder="Rate of interest"  ng-model="i" ng-focus="flag=false" /><br><br>
+               <input type="text" class="custom-width-center" placeholder="Number of years" ng-model="n" ng-focus="flag=false" /><br><br>
+               <center><button type="button" class="btn btn-primary" style="background-color:#ff3386;"  ng-click="flag=true; calculate()"><b>Calculate</b></button><br><br>
+               <button type="reset" class="btn btn-primary" style="background-color:#ff3386;" ng-click="flag=false; p=0; i=0; n=0"><b>Reset</b></button><br><br>
+             </form>
+             </center>
              <div ng-show="flag">
                 <div ng-if="calculate()">
                   <center>
@@ -73,42 +70,42 @@ body{
                 <div ng-if="!calculate()">
                  <h5>Please fill all datas!</h5><br>
                 </div>
+             </div>
+           </div>
+         </div>
+         <div id="CI" class="tab-pane fade">   
+           <div  id="compound" ng-controller="cmp" ng-init="flag=false">
+             <br>
+             <center><h4>Compound Interest</h4></center>
+             <center>
+             <h5>Please fill all datas</h5>
+             <form name="compoundform">
+               <input type="text" class="custom-width-center" placeholder="Enter principle amount" ng-model="pc" ng-focus="flag=false" ng-invalid="clc=true"/><br><br>
+               <input type="text" class="custom-width-center" placeholder="Rate of interest" ng-model="ic" ng-focus="flag=false"/><br><br>
+               <input type="text" class="custom-width-center" placeholder="Number of years" ng-model="nc" ng-focus="flag=false"/><br><br>
+               <input type="text" class="custom-width-center" placeholder="Number of times" ng-model="tc" ng-focus="flag=false"/><br><br>
+               <button type="button" class="btn btn-primary" style="background-color:#ff3386;" ng-click="flag=true"><b>Calculate</b></button><br><br>
+               <button type="reset" class="btn btn-primary" style="background-color:#ff3386;" ng-click="flag=false; pc=0;ic=0;nc=0;tc=0"><b>Reset</b></button><br>
+             </form>
+             </center>
+               <div ng-show="flag">
+                  <div ng-if="calculate()">
+                    <center>
+                    <h5><b>Compound Interest is {{ calculate() - pc | number:2 }}</b></h5>
+                    <h5><b>Total amount has to be paid is {{ calculate() | number:2 }}</b></h5><br>
+                  </div>
+                <div ng-if="!calculate()">
+                  <h5>Please fill all datas!</h5><br>
+                </div>
               </div>
             </div>
-         </div>
-     <div id="CI" class="tab-pane fade">   
-        <div  id="compound" ng-controller="cmp" ng-init="flag=false">
-         <br>
-          <center><h4>Compound Interest</h4></center>
-          <center>
-              <h5>Please fill all datas</h5>
-              <form name="compoundform">
-                <input type="text" class="custom-width-center" placeholder="Enter principle amount" ng-model="pc" ng-focus="flag=false" ng-invalid="clc=true"/><br><br>
-                <input type="text" class="custom-width-center" placeholder="Rate of interest" ng-model="ic" ng-focus="flag=false"/><br><br>
-                <input type="text" class="custom-width-center" placeholder="Number of years" ng-model="nc" ng-focus="flag=false"/><br><br>
-                <input type="text" class="custom-width-center" placeholder="Number of times" ng-model="tc" ng-focus="flag=false"/><br><br>
-                <button type="button" class="btn btn-primary" style="background-color:#ff3386;" ng-click="flag=true"><b>Calculate</b></button><br><br>
-                <button type="reset" class="btn btn-primary" style="background-color:#ff3386;" ng-click="flag=false; pc=0;ic=0;nc=0;tc=0"><b>Reset</b></button><br>
-              </form>
-           </center>
-          <div ng-show="flag">
-                <div ng-if="calculate()">
-                  <center>
-                  <h5><b>Compound Interest is {{ calculate() - pc | number:2 }}</b></h5>
-                  <h5><b>Total amount has to be paid is {{ calculate() | number:2 }}</b></h5><br>
-                </div>
-              <div ng-if="!calculate()">
-                 <h5>Please fill all datas!</h5><br>
-                </div>
           </div>
         </div>
+        <div class="com-md-3">
+        </div>
+      </div>
     </div>
-</div>
-<div class="com-md-3">
-</div>
-</div>
-</div>
-</div>
+  </div>
 <script>
 var rootapp=angular.module('rootapp', ['simple','compound']);
 var app1 = angular.module('simple',[]);
@@ -130,7 +127,7 @@ app1.controller('smp', function($scope){
       }
       return (($scope.p * $scope.ip * $scope.n)/100);
       
-}
+  }
 
 });
 
@@ -164,11 +161,6 @@ app1.controller('cmp', function($scope){
    
 });
 </script>
-<footer class="footer">
-<div class="container" style="padding-top:20px">
-<center>
-</center>
-</footer>
 </body>
 </html>
 
