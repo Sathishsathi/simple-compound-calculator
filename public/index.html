@@ -3,6 +3,7 @@
 <title>
 Calculate | Simple and compound interest 
 </title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -52,7 +53,7 @@ body{
         <center>
                 <h5>Please fill all datas and then you can click calculate</h5>
                 <form name="dataform">
-                  <input  type="text" placeholder="Enter principle amount" required value=0 ng-model="p" ng-focus="flag=false" ng-invalid="clc=true"/><br>
+                  <input  type="text" placeholder="Enter principle amount" required  ng-model="p" ng-focus="flag=false" ng-invalid="clc=true"/><br>
                   <input type="text" placeholder="Rate of interest" required value=0 ng-model="i" ng-focus="flag=false" ng-invalid="clc=true"/><br>
                   <input type="text" placeholder="Number of years" required value=0 ng-model="n" ng-focus="flag=false" ng-invalid="clc=true"/><br><br>
                   <center><button type="button" class="btn btn-primary" style="background-color:#ff3386;" ng-disabled="dataform.$invalid || clc" ng-click="flag=true; calculate()" data-toggle="modal" data-target="#simplemodal"><b>Calculate</b></button><br><br>
