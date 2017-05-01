@@ -14,6 +14,9 @@ Calculate | Simple and compound interest
 a:link {
     text-decoration: none;
 }
+a:hover{
+    color: black;
+}
 body{
   background-image:url("bg.svg");
    
@@ -38,58 +41,64 @@ body{
     <div id="about" class="tab-pane fade in active">
       <h3>About</h3>
      <center> <img src="profile.jpg" class="img-circle" width="60px" height="60px"/></center>
-<h5>Developed By <b>Sathish Kumar K</b></h5>
+<h5>Developed By <a href="https://sathishsathi.github.io/"><b>Sathish Kumar K</b></a></h5>
       <p>A simple web application designed using AngularJS. This application will calculates you a Simple interest and Compound Interest.</p> <h5><b>Note</b></h5>
         <ul>
         <li>Click on the tabs to start calculating</li>
         <li>No field should be left unfilled.</li>
-        <li>Calculate button gets enabled only after filling all the datas</li>
+        
         </ul><br><br>
     </div>
     <div id="SI" class="tab-pane fade">
-       <div id="simple" ng-controller="smp" ng-init="flag=false; clc=false">
+       <div id="simple" ng-controller="smp" ng-init="flag=false">
         <br>
         <center><h4>Simple Interest</h4></center>
         <center>
-                <h5>Please fill all datas and then you can click calculate</h5>
+                <h5>Please fill all datas</h5>
                 <form name="dataform">
-                  <input  type="text" placeholder="Enter principle amount" required  ng-model="p" ng-focus="flag=false" ng-invalid="clc=true"/><br>
-                  <input type="text" placeholder="Rate of interest" required value=0 ng-model="i" ng-focus="flag=false" ng-invalid="clc=true"/><br>
-                  <input type="text" placeholder="Number of years" required value=0 ng-model="n" ng-focus="flag=false" ng-invalid="clc=true"/><br><br>
-                  <center><button type="button" class="btn btn-primary" style="background-color:#ff3386;" ng-disabled="dataform.$invalid || clc" ng-click="flag=true; calculate()" data-toggle="modal" data-target="#simplemodal"><b>Calculate</b></button><br><br>
-                  <button type="reset" class="btn btn-primary" style="background-color:#ff3386;" ng-click="flag=false; clc=true"><b>Reset</b></button><br><br>
+                  <input  type="text" class="custom-width-center" placeholder="Enter principle amount"  ng-model="p" ng-focus="flag=false" /><br><br>
+                  <input type="text" class="custom-width-center" placeholder="Rate of interest"  ng-model="i" ng-focus="flag=false" /><br><br>
+                  <input type="text" class="custom-width-center" placeholder="Number of years" ng-model="n" ng-focus="flag=false" /><br><br>
+                  <center><button type="button" class="btn btn-primary" style="background-color:#ff3386;"  ng-click="flag=true; calculate()"><b>Calculate</b></button><br><br>
+                  <button type="reset" class="btn btn-primary" style="background-color:#ff3386;" ng-click="flag=false; p=0; i=0; n=0"><b>Reset</b></button><br><br>
                 </form>
               </center>
              <div ng-show="flag">
                 <div ng-if="calculate()">
                   <center>
                   <h5><b>Simple Interest is {{ calculate() | number:2 }}</b></h5>
-                  <h5><b>Total amount has to be paid is {{ calculate() + p | number:2 }}</b></h5>
+                  <h5><b>Total amount has to be paid is {{ calculate() + p | number:2 }}</b></h5><br>
                   <center>
+                </div>
+                <div ng-if="!calculate()">
+                 <h5>Please fill all datas!</h5><br>
                 </div>
               </div>
             </div>
          </div>
      <div id="CI" class="tab-pane fade">   
-        <div  id="compound" ng-controller="cmp" ng-init="flag=false; clc=false">
+        <div  id="compound" ng-controller="cmp" ng-init="flag=false">
          <br>
           <center><h4>Compound Interest</h4></center>
           <center>
-              <h5>Please fill all datas and then you can click calculate</h5>
+              <h5>Please fill all datas</h5>
               <form name="compoundform">
-                <input type="text" placeholder="Enter principle amount" required ng-model="pc" value=0 ng-focus="flag=false" ng-invalid="clc=true"/><br>
-                <input type="text" placeholder="Rate of interest" required ng-model="ic" value=0 ng-focus="flag=false" ng-invalid="clc=true"/><br>
-                <input type="text" placeholder="Number of years" required ng-model="nc" value=0 ng-focus="flag=false" ng-invalid="clc=true"/><br>
-                <input type="text" placeholder="Number of times" required ng-model="tc" value=0 ng-focus="flag=false" ng-invalid="clc=true"/><br><br>
-                <button type="button" class="btn btn-primary" style="background-color:#ff3386;" ng-disabled="compoundform.$invalid ||clc" ng-click="flag=true"><b>Calculate</b></button><br><br>
-                <button type="reset" class="btn btn-primary" style="background-color:#ff3386;" ng-click="flag=false"><b>Reset</b></button>
+                <input type="text" class="custom-width-center" placeholder="Enter principle amount" ng-model="pc" ng-focus="flag=false" ng-invalid="clc=true"/><br><br>
+                <input type="text" class="custom-width-center" placeholder="Rate of interest" ng-model="ic" ng-focus="flag=false"/><br><br>
+                <input type="text" class="custom-width-center" placeholder="Number of years" ng-model="nc" ng-focus="flag=false"/><br><br>
+                <input type="text" class="custom-width-center" placeholder="Number of times" ng-model="tc" ng-focus="flag=false"/><br><br>
+                <button type="button" class="btn btn-primary" style="background-color:#ff3386;" ng-click="flag=true"><b>Calculate</b></button><br><br>
+                <button type="reset" class="btn btn-primary" style="background-color:#ff3386;" ng-click="flag=false; pc=0;ic=0;nc=0;tc=0"><b>Reset</b></button>
               </form>
            </center>
           <div ng-show="flag">
                 <div ng-if="calculate()">
                   <center>
                   <h5><b>Compound Interest is {{ calculate() - pc | number:2 }}</b></h5>
-                  <h5><b>Total amount has to be paid is {{ calculate() | number:2 }}</b></h5>
+                  <h5><b>Total amount has to be paid is {{ calculate() | number:2 }}</b></h5><br>
+                </div>
+              <div ng-if="!calculate()">
+                 <h5>Please fill all datas!</h5><br>
                 </div>
           </div>
         </div>
@@ -106,13 +115,19 @@ var app1 = angular.module('simple',[]);
 app1.controller('smp', function($scope){
    
    $scope.calculate = function(){
-      if (dataform.$invalid){
-         $scope.flag = false;
-}
       $scope.p = parseInt($scope.p);
+      if ($scope.p.length === 0){
+        $scope.p = 0;
+      }
       $scope.i = parseInt($scope.i);
+      if ($scope.i.length === 0){
+        $scope.i = 0;
+      }
       $scope.ip = $scope.i/100;
       $scope.n = parseInt($scope.n);
+      if ($scope.n.length === 0){
+        $scope.n = 0;
+      }
       return (($scope.p * $scope.ip * $scope.n)/100);
       
 }
@@ -124,10 +139,22 @@ app1.controller('cmp', function($scope){
 
    $scope.calculate = function(){
       $scope.pc = parseInt($scope.pc);
+      if ($scope.pc === undefined){
+        $scope.pc = 0;
+      }
       $scope.ic = parseInt($scope.ic);
+      if ($scope.ic === undefined){
+        $scope.ic = 0;
+      }
       $scope.ipc = $scope.ic/100;
       $scope.nc = parseInt($scope.nc);
+      if ($scope.nc === undefined){
+        $scope.nc = 0;
+      }
       $scope.tc = parseInt($scope.tc);
+      if ($scope.tc === undefined){
+        $scope.tc = 0;
+      }
       $scope.ratio = 1+($scope.ipc/$scope.tc);
       $scope.power = $scope.tc * $scope.nc;
       $scope.powerv = Math.pow($scope.ratio, $scope.power);
